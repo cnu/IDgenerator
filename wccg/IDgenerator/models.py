@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 
-class RiderDetails(models.Model):
+class Rider(models.Model):
     id = models.AutoField(primary_key=True)
     rider_id = models.CharField(max_length=50, unique=True, db_index=True)
     first_name = models.CharField(max_length=50, null=True)
@@ -27,4 +27,4 @@ class RiderDetails(models.Model):
     comments = models.TextField()
 
     class Meta:
-        db_table = 'rider_details'
+        db_table = 'riders'
