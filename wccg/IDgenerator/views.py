@@ -1,9 +1,12 @@
 import json
 import traceback
-
+from .create_id import main
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from IDgenerator.models import Rider
+import IDgenerator.models
+from random import randint
+from datetime import date, datetime
 
 
 @csrf_exempt
