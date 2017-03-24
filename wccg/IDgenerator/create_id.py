@@ -171,12 +171,13 @@ def write_idcard_details(c, id, name, blood, emergency_name, emergency_no):
 
     c.drawText(t)
 
+
 def send_mail(recipient, subject, body, attachment):
     recipients = [recipient]
     emaillist = [elem.strip().split(',') for elem in recipients]
     msg = MIMEMultipart()
     msg['Subject'] = subject
-    msg['From'] = 'teamwccg@gmail.com'
+    msg['From'] = 'narenravi92@gmail.com'
     msg['Reply-to'] = recipient
 
     msg.preamble = 'Multipart massage.\n'
@@ -191,48 +192,42 @@ def send_mail(recipient, subject, body, attachment):
     server.ehlo()
     server.starttls()
     server.login(username, password)
-
     server.sendmail(msg['From'], emaillist, msg.as_string())
 
 
-def main():
-    """Function that calls the correct drawing routines (Expects three
-    strings name, organisation and registration number)"""
-    read_csv.run()
-    with open('rider_details.json') as f:
-        riders = json.load(f)
-    for i, rider in enumerate(riders[1:]):
-        print "Generating ID card for Rider", i
-        uid = rider[0]
-        name = rider[1]
-        blood = rider[2]
-        emergency_name = rider[3]
-        emergency_no = rider[4]
-        rider_no = rider[5]
-        rider_mail = rider[6]
-        qr_data = "ID: {0}\n{1}\nBlood Group: {2}\nContact : {3}".format(uid, name, blood, rider_no)
-        qr_created = create_qr(uid + '.png', qr_data)
-        c = canvas.Canvas(uid + ".pdf", bottomup=1, pagesize=A4)
-        c.translate(2 * cm, 2 * cm)
-        draw_borders(c)
-        draw_banner(c)
-        draw_image(c)
-        draw_qr(c, qr_created)
-        draw_photo(c)
-        write_details(c, uid, name, blood, emergency_name, emergency_no)
-        write_idcard_details(c, uid, name, blood, emergency_name, emergency_no)
-        c.showPage()
-        c.save()
-        subject = 'WELCOME TO WCCG - We are Chennai Cycling Group'
-        header = 'Hey ' + name + ',\n\n' + "Your rider number is {0}.\n\nThanks a bunch for your interest in WCCG! " \
-                                           "One of the best cycling groups " \
-                                           "in Namma Chennai! We are extremely delighted to have you " \
-                                           "\"Ride it out!\" " \
-                                           "with us. \n\n".format(uid)
-        body = mail_template
-        send_mail(rider_mail, subject, header + body, uid + '.pdf')
-        # if i == 0:
-        #     break
+def main(metadata):
+    print("Generating ID card for Rider")
+    uid = '17CC123' # metadata.get('rider_id')
+    name = metadata.get('first_name')
+    blood = metadata.get('blood_group')
+    emergency_name = metadata.get('emergency_name')
+    emergency_no = metadata.get('emergency_number')
+    rider_no = 111111
+    rider_mail = metadata.get('contact_email')
+    qr_data = "ID: {0}\n{1}\nBlood Group: {2}\nContact : {3}".format(uid, name, blood, rider_no)
+    qr_created = create_qr(str(uid) + '.png', qr_data)
+    c = canvas.Canvas(str(uid) + ".pdf", bottomup=1, pagesize=A4)
+    c.translate(2 * cm, 2 * cm)
+    draw_borders(c)
+    draw_banner(c)
+    draw_image(c)
+    draw_qr(c, qr_created)
+    draw_photo(c)
+    write_details(c, uid, name, blood, emergency_name, emergency_no)
+    write_idcard_details(c, uid, name, blood, emergency_name, emergency_no)
+    c.showPage()
+    c.save()
+    subject = 'WELCOME TO WCCG - We are Chennai Cycling Group'
+    header = 'Hey ' + name + ',\n\n' + "Your rider number is {0}.\n\nThanks a bunch for your interest in WCCG! " \
+                                       "One of the best cycling groups " \
+                                       "in Namma Chennai! We are extremely delighted to have you " \
+                                       "\"Ride it out!\" " \
+                                       "with us. \n\n".format(uid)
+    body = mail_template
+    send_mail(rider_mail, subject, header + body, str(uid) + '.pdf')
+    return True
+    # if i == 0:
+    #     break
 
 if __name__ == "__main__":
     main()
