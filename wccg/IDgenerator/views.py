@@ -3,7 +3,7 @@ import traceback
 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from IDgenerator.models import RiderDetails
+from IDgenerator.models import Rider
 
 
 @csrf_exempt
@@ -23,7 +23,7 @@ def validator(data):
 
 
 def insert_db(data):
-    db = RiderDetails(**data)
+    db = Rider(**data)
     try:
         db.save()
         return True
