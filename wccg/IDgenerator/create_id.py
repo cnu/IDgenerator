@@ -12,10 +12,10 @@ from email.mime.multipart import MIMEMultipart
 import smtplib
 from configparser import ConfigParser
 
-with open('mail_template.txt', 'r') as f:
+with open('/Users/naren/MADworkspace/projects/personal/IDgenerator/wccg/IDgenerator/mail_template.txt', 'r') as f:
     mail_template = f.read()
 config = ConfigParser()
-config.read('mailing.cfg')
+config.read('/Users/naren/MADworkspace/projects/personal/IDgenerator/wccg/IDgenerator/mailing.cfg')
 username = config.get('credentials', 'username')
 password = config.get('credentials', 'password')
 
@@ -54,8 +54,8 @@ def draw_image(c):
     """Draws the logo image at the correct position"""
     # im = Image('LogoFull02.png', 4*cm, 4*cm)
     # c.drawImage(im)
-    c.drawImage("logo.jpg", 1 * cm, 25.5 * cm, width=4 * cm, height=1.2 * cm, preserveAspectRatio=True)
-    c.drawImage("logo.jpg", 0 * cm, 7 * cm, width=3 * cm, height=0.6 * cm, preserveAspectRatio=True)
+    c.drawImage("/Users/naren/MADworkspace/projects/personal/IDgenerator/wccg/IDgenerator/logo.jpg", 1 * cm, 25.5 * cm, width=4 * cm, height=1.2 * cm, preserveAspectRatio=True)
+    c.drawImage("/Users/naren/MADworkspace/projects/personal/IDgenerator/wccg/IDgenerator/logo.jpg", 0 * cm, 7 * cm, width=3 * cm, height=0.6 * cm, preserveAspectRatio=True)
 
 
 def draw_photo(c):
