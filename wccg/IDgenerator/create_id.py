@@ -5,14 +5,12 @@ from reportlab.pdfgen import canvas, textobject, pdfimages
 from reportlab.lib.units import cm
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.colors import Color, black, blue, red
-import json
 import qrcode
-import read_csv
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 import smtplib
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 
 with open('mail_template.txt', 'r') as f:
     mail_template = f.read()
