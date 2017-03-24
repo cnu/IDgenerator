@@ -25,6 +25,8 @@ class Rider(models.Model):
     expectations = models.TextField()
     event_types = models.TextField()
     comments = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'riders'
