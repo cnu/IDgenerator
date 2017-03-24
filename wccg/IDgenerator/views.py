@@ -13,8 +13,12 @@ from datetime import date, datetime
 def submit_idcard(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('UTF-8'))
-        validator(data)
+        # validator(data)
+        new_rider_id = generate_rider_id()
+        print(new_rider_id)
+        data.update({'rider_id': new_rider_id})
         insert_successful = insert_db(data)
+        #   id_created = main(data)
         if insert_successful:
             return HttpResponse('Inserted into database successfully')
         else:
