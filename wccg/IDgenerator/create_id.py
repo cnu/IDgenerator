@@ -12,7 +12,8 @@ from email.mime.multipart import MIMEMultipart
 import smtplib
 from configparser import ConfigParser
 
-with open('/Users/naren/MADworkspace/projects/personal/IDgenerator/wccg/IDgenerator/mail_template.txt', 'r') as f:
+
+with open('templates/mail_template.txt', 'r') as f:
     mail_template = f.read()
 config = ConfigParser()
 config.read('/Users/naren/MADworkspace/projects/personal/IDgenerator/wccg/IDgenerator/mailing.cfg')
