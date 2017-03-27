@@ -225,8 +225,3 @@ def main(metadata):
     body = mail_template
     send_mail(rider_mail, subject, header + body, str(uid) + '.pdf')
     return True
-    # if i == 0:
-    #     break
-
-if __name__ == "__main__":
-    main()
