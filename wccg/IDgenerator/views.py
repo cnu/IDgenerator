@@ -36,12 +36,13 @@ def generate_rider_id():
     except:
         rider_id = prefix + 'CC' + '00001'
         return rider_id
-    print(latest_id)
     to_incr = latest_id.split('CC')[-1]
-    zeros_count = str(to_incr).count('0')
-    print('zeros_count', zeros_count)
+    digits = len(str(int(to_incr))) - 1
+    if int(to_incr) % 10 == 0:
+        zeros_count = str(to_incr).count('0') + digits -1
+    else:
+        zeros_count = str(to_incr).count('0') + digits
     next_id = str(int(to_incr) + 1).zfill(zeros_count+1)
-    print(prefix, next_id)
     rider_id = prefix + 'CC' + next_id
     return rider_id
 
