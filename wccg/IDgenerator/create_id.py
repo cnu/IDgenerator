@@ -10,15 +10,13 @@ from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 import smtplib
-from configparser import ConfigParser
+from wccg.settings import CREDENTIALS
 
 
 with open('templates/mail_template.txt', 'r') as f:
     mail_template = f.read()
-config = ConfigParser()
-config.read('/Users/naren/MADworkspace/projects/personal/IDgenerator/wccg/IDgenerator/mailing.cfg')
-username = config.get('credentials', 'username')
-password = config.get('credentials', 'password')
+username = CREDENTIALS.get('sender_email')
+password = CREDENTIALS.get('sender_pass')
 
 
 def create_qr(fname, data):
